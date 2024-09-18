@@ -4,7 +4,6 @@ import { useExchangeRates } from '../hooks/useExchangeRates'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
-
 import './CurrencyConverter.css'
 
 const CurrencyConverter = () => {
@@ -16,25 +15,44 @@ const CurrencyConverter = () => {
 	const { rates, loading } = useExchangeRates()
 
 	useEffect(() => {
-		if (rates[currency2]) {
-			setAmount2(
-				Number((amount1 * (rates[currency2] / rates[currency1])).toFixed(2))
+		if (rates[currency1]) {
+			setAmount1(
+				Number((amount2 * (rates[currency1] / rates[currency2])).toFixed(2))
 			)
 		}
 	}, [amount1, currency1, currency2, rates])
 
 	const handleAmount1Change = amount => {
-		setAmount1(amount)
-		setAmount2(
-			Number((amount * (rates[currency2] / rates[currency1])).toFixed(2))
-		)
+		if (amount === '') {
+			setAmount1('')
+			setAmount2('')
+		} else {
+			const numericAmount = Number(amount)
+			setAmount1(numericAmount)
+
+			if (rates[currency1] && rates[currency2]) {
+				setAmount2(
+					Number((amount * (rates[currency2] / rates[currency1])).toFixed(2))
+				)
+			}
+		}
 	}
 
 	const handleAmount2Change = amount => {
-		setAmount2(amount)
-		setAmount1(
-			Number((amount * (rates[currency1] / rates[currency2])).toFixed(2))
-		)
+		if (amount === '') {
+			setAmount2('')
+			setAmount1('')
+		} else {
+			const numericAmount = Number(amount)
+
+			setAmount2(numericAmount)
+
+			if (rates[currency1] && rates[currency2]) {
+				setAmount1(
+					Number((amount * (rates[currency1] / rates[currency2])).toFixed(2))
+				)
+			}
+		}
 	}
 
 	const handleCurrency1Change = currency => {
@@ -78,7 +96,11 @@ const CurrencyConverter = () => {
 						<img src='/eur-flag.svg' alt='EUR' width={30} height={30} />
 						<p>
 							EUR/UAH:{' '}
-							{loading ? <FontAwesomeIcon icon={faSpinner} spin color='#3b82f6' /> : (1 / rates.EUR).toFixed(2)}
+							{loading ? (
+								<FontAwesomeIcon icon={faSpinner} spin color='#3b82f6' />
+							) : (
+								(1 / rates.EUR).toFixed(2)
+							)}
 						</p>
 					</div>
 				</div>
@@ -91,7 +113,7 @@ const CurrencyConverter = () => {
 						<div className='input-wrapper'>
 							<input
 								type='number'
-								value={amount1}
+								value={amount1 === 0 ? '' : amount1}
 								onChange={e => handleAmount1Change(Number(e.target.value))}
 							/>
 						</div>
@@ -111,7 +133,7 @@ const CurrencyConverter = () => {
 						<div className='input-wrapper'>
 							<input
 								type='number'
-								value={amount2}
+								value={amount2 === 0 ? '' : amount2}
 								onChange={e => handleAmount2Change(Number(e.target.value))}
 							/>
 						</div>
