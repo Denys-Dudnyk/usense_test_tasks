@@ -15,9 +15,9 @@ const CurrencyConverter = () => {
 	const { rates, loading } = useExchangeRates()
 
 	useEffect(() => {
-		if (rates[currency1]) {
-			setAmount1(
-				Number((amount2 * (rates[currency1] / rates[currency2])).toFixed(2))
+		if (rates[currency2]) {
+			setAmount2(
+				Number((amount1 * (rates[currency2] / rates[currency1])).toFixed(2))
 			)
 		}
 	}, [amount1, currency1, currency2, rates])
