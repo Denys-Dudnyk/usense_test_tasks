@@ -1,0 +1,122 @@
+.currency_select {
+	position: relative;
+}
+
+.select_button {
+	position: relative;
+	width: 100%;
+	padding: 12px 40px 12px 12px;
+	text-align: left;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	margin-top: 12px;
+
+	cursor: pointer;
+
+	@media (max-width: 640px) {
+		font-size: 14px;
+		line-height: 20px;
+	}
+}
+
+.select_button:focus {
+	outline: none;
+	border-color: #3b82f6;
+}
+
+.selected_option {
+	display: flex;
+	align-items: center;
+}
+
+.selected_option img {
+	width: 20px;
+	height: 20px;
+}
+
+.selected_option span {
+	margin-left: 12px;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.arrow {
+	pointer-events: none;
+	position: absolute;
+	right: 0;
+	top: 0px;
+	bottom: 0px;
+	margin-left: 12px;
+	display: flex;
+	align-items: center;
+	padding-right: 8px;
+}
+
+.arrow_icon {
+	width: 20px;
+	height: 20px;
+	color: #9ca3af;
+}
+
+.option_list {
+	position: absolute;
+	z-index: 10;
+	margin-top: 4px;
+	max-height: 224px;
+	width: 100%;
+	overflow: auto;
+	background-color: #fff;
+	padding: 4px 0 4px 0;
+	font-size: 16px;
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+.option {
+	padding: 10px;
+	position: relative;
+	user-select: none;
+	padding: 8px 36px 8px 12px;
+	cursor: pointer;
+}
+
+.option_wrapper {
+	display: flex;
+	align-items: center;
+}
+
+.option:hover {
+	background-color: #dbeafe;
+}
+
+.option img {
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+}
+
+.option.selected {
+	background-color: #e6f2ff;
+}
+
+.check {
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	padding-right: 16px;
+	color: #3b82f6;
+}
+
+.check_svg {
+	color: #3b82f6;
+	width: 20px;
+	height: 20px;
+}
